@@ -10,7 +10,7 @@
       <li>
         <a href=""><p>{{ i.name }}</p></a>
         <a href="{{ url_for('editRestaurant', restaurant_id=i.id) }}"><span>edit</span></a>
-        <a href=""><span>delete</span></a>
+        <a href="{{ url_for('deleteRestaurant', restaurant_id=i.id) }}"><span>delete</span></a>
       </li>
       {% endfor %}
     </ul>

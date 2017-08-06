@@ -45,6 +45,18 @@ def editRestaurant(restaurant_id):
         return render_template('editrestaurant.html',
         restaurant=restaurant)
 
+@app.route('/restaurants/<int:restaurant_id>/delete/', methods=['GET', 'POST'])
+def deleteRestaurant(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    if request.method == 'POST':
+        session.delete(restaurant)
+        session.commit()
+        return redirect(url_for('displayRestaurants'))
+    else:
+        return render_template('deleterestaurant.html',
+        restaurant=restaurant)
+
+
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
