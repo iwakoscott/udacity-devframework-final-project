@@ -4,21 +4,17 @@
     <title>Menu Items</title>
   </head>
   <body>
-    <h1>Name of Restaurant</h1>
+    <h1>{{ restaurant.name }}</h1>
     <ul>
+      {% for i in items %}
       <li>
-        <a href=""><p>Name of Menu Item</p></a>
-        <ul>
-          <li>
-            Price
-          </li>
-          <li>
-            Description
-          </li>
-        </ul>
+        <h2>{{ i.name }}</h2>
+        <p> {{ i.price }} </p>
+        <p> {{ i.description }}</p>
         <a href=""><span>edit</span></a>
         <a href=""><span>delete</span></a>
       </li>
+      {% endfor %}
     </ul>
   </body>
 </html>
