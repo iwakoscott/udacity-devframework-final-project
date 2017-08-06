@@ -6,11 +6,13 @@
   <body>
     <h1>Restaurants</h1>
     <ul>
+      {% for i in items %}
       <li>
-        <a href=""><p>Name of Restaurant</p></a>
+        <a href=""><p>{{ i.name }}</p></a>
         <a href=""><span>edit</span></a>
         <a href=""><span>delete</span></a>
       </li>
+      {% endfor %}
     </ul>
   </body>
 </html>
