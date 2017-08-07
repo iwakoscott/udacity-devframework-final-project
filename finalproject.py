@@ -76,6 +76,27 @@ def deleteMenuItem(restaurant_id, menu_id):
             item=item,
             restaurant=restaurant)
 
+@app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/edit/',
+    methods=['GET', 'POST'])
+def editMenuItem(restaurant_id, menu_id):
+    item = session.query(MenuItem).filter_by(id=menu_id).one()
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    if request.method == 'POST':
+        new_name = request.form['newMenuItemName']
+        new_price = request.form['newMenuItemPrice']
+        new_description = request.form['newMenuItemDescription']
+        if new_name:
+            item.name = new_name
+        if new_price:
+            item.price = new_price
+        if new_description:
+            item.description = new_description
+        return redirect(url_for('displayMenu', restaurant_id=restaurant.id))
+    else:
+        return render_template('editmenuitems.html',
+        restaurant=restaurant,
+        item=item)
+
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.debug = True
