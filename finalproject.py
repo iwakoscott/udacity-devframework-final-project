@@ -62,6 +62,19 @@ def displayMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     return render_template('menuitems.html', items=items, restaurant=restaurant)
 
+@app.route('/restaurant/<int:restaurant_id>/menu/<int:menu_id>/delete/',
+    methods=['GET', 'POST'])
+def deleteMenuItem(restaurant_id, menu_id):
+    item = session.query(MenuItem).filter_by(id=menu_id).one()
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    if request.method == 'POST':
+        session.delete(item)
+        session.commit()
+        return redirect(url_for('displayMenu', restaurant_id=restaurant.id))
+    else:
+        return render_template('deletemenuitems.html',
+            item=item,
+            restaurant=restaurant)
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
